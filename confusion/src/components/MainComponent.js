@@ -8,6 +8,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
 
+    console.log("Main Component constructor() invoked");
     this.state = {
       dishes: DISHES,
       selectedDish: null
@@ -16,10 +17,11 @@ class Main extends Component {
 
   onDishSelect(dishId) {
     this.setState({ selectedDish: dishId});
-    console.log("Menu Component onDishSelect invoked");
+    console.log("Main Component onDishSelect() invoked");
   }
 
   render() {
+    console.log("Main Component render() invoked");
     return ( 
       <div className="container">
       <Navbar dark color="primary">

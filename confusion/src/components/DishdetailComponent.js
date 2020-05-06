@@ -7,11 +7,11 @@ class DishDetail extends Component {
     constructor(props) {
         super(props);
 
-        console.log("Menu DishDetail constructor is invoked")
+        console.log("DishDetail constructor() is invoked")
     }
 
     renderDish(dish) {
-        console.log("Menu DishDetail renderDish invoked")
+        console.log("DishDetail renderDish() invoked")
         if (dish != null)
             return(
                 <div  className="col-12 col-md-5 m-1">
@@ -31,7 +31,7 @@ class DishDetail extends Component {
     }
 
     renderComments(comments) {
-        console.log("Menu DishDetail renderComments invoked")
+        console.log("DishDetail renderComments() invoked")
 
         if (comments != null) {
             const list_items = this.props.dish.comments.map((comment) => {
@@ -67,7 +67,7 @@ class DishDetail extends Component {
     }
 
     render() {
-        console.log("Menu DishDetail render is invoked")
+        console.log("DishDetail render() is invoked")
         const dish = this.props.dish;
 
         if (dish != null) {
@@ -85,7 +85,6 @@ class DishDetail extends Component {
             return(
                 <div></div>
             );
-
     }
 }
 

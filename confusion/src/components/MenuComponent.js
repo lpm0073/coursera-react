@@ -6,19 +6,23 @@ class Menu extends Component {
     constructor(props) {
         super(props);
 
-        console.log("Menu Component constructor is invoked");
+        console.log("Menu Component constructor() invoked");
     }
 
     componentDidMount() {
-        console.log("Menu Component componentDidMount is invoked");
+        console.log("Menu Component componentDidMount() invoked");
     }
 
     componentDidUpdate() {
-        console.log("Menu Component componentDidUpdate is invoked");
+        console.log("Menu Component componentDidUpdate() invoked");
     }
     
+    onClick() {
+        console.log("Menu Component onClick() invoked");
+    }
 
     render() {
+        console.log("Menu Component render() invoked: ");
         const menu = this.props.dishes.map((dish) => {
             return (
               <div key={dish.id} className="col-12 col-md-5 m-1">
@@ -28,14 +32,6 @@ class Menu extends Component {
               </div>
             );
         });
-
-        const ids = this.props.dishes.map((dish) => {
-            return (
-                <span>{dish.id}</span>
-            );
-        });
-
-        console.log("Menu Component render invoked: ", ids);
 
         return (
                 <div className="row">
