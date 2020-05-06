@@ -46,16 +46,10 @@ class Menu extends Component {
         console.log("Menu Component render invoked: ", ids)
 
         return (
-            <div className="container">
                 <div className="row">
                     {menu}
-                </div>
-                <div className="row">
-                  <div  className="col-12 m-1">
                     <DishDetail dish={this.state.selectedDish} />
-                  </div>
                 </div>
-            </div>
         );
     }
 }

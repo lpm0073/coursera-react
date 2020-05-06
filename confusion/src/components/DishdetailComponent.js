@@ -8,7 +8,6 @@ class DishDetail extends Component {
         super(props);
 
         console.log("Menu DishDetail constructor is invoked")
-        this.setState({ dish: props.dish});
     }
 
     renderDish(dish) {
@@ -50,7 +49,7 @@ class DishDetail extends Component {
                         <CardBody>
                             <CardTitle><h4>Comments</h4></CardTitle>
                             <CardText>
-                                <ul class = "list-unstyled">
+                                <ul className = "list-unstyled">
                                     {list_items}
                                 </ul>
                             </CardText>
