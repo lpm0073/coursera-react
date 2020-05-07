@@ -16,6 +16,24 @@ class Contact extends Component {
             contactType: 'Tel.',
             message: ''
         }
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+    
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        })
+    }
+
+    handleSubmit(event) {
+        console.log('Current State is: ', JSON.stringify(this.state))
+        alert('Current State is: ', JSON.stringify(this.state))
+        event.preventDefault()
     }
 
     render() {
@@ -63,7 +81,7 @@ class Contact extends Component {
                         <h3>Send us Your feedback</h3>
                     </div>
                     <div className="col-12 col-md-9">
-                        <Form>
+                        <Form onSubmit={this.handleSubmit}>
                             <FormGroup row>
                                 <Label htmlFor="firstname" md={2}>First Name</Label>
                                 <Col md={10}>
@@ -71,6 +89,7 @@ class Contact extends Component {
                                         id="firstname" 
                                         name="firstname"
                                         placeholder="First Name"
+                                        onChange={this.handleInputChange}
                                         value={this.state.firstname} />
                                 </Col>
                             </FormGroup>
@@ -81,6 +100,7 @@ class Contact extends Component {
                                         id="lastname" 
                                         name="lastname"
                                         placeholder="Last Name"
+                                        onChange={this.handleInputChange}
                                         value={this.state.lastname} />
                                 </Col>
                             </FormGroup>
@@ -91,6 +111,7 @@ class Contact extends Component {
                                         id="telnum" 
                                         name="telnum"
                                         placeholder="+1 (123) 456-7890"
+                                        onChange={this.handleInputChange}
                                         value={this.state.telnum} />
                                 </Col>
                             </FormGroup>
@@ -101,6 +122,7 @@ class Contact extends Component {
                                         id="email" 
                                         name="email"
                                         placeholder="address@email.com"
+                                        onChange={this.handleInputChange}
                                         value={this.state.email} />
                                 </Col>
                             </FormGroup>
@@ -110,6 +132,7 @@ class Contact extends Component {
                                         <Label check>
                                             <Input type="checkbox" 
                                             name="agree"
+                                            onChange={this.handleInputChange}
                                             checked={this.state.agree}
                                              />
                                              <strong>may we contact you?</strong>
@@ -120,6 +143,7 @@ class Contact extends Component {
                                     <FormGroup>
                                         <Input type="select"
                                         name="contactType"
+                                        onChange={this.handleInputChange}
                                         value={this.state.contactType}>
                                             <option>Tel.</option>
                                             <option>Email</option>
@@ -134,8 +158,9 @@ class Contact extends Component {
                                         id="message" 
                                         name="message"
                                         rows="12"
+                                        onChange={this.handleInputChange}
                                         placeholder="Type something...."
-                                        value={this.state.email} />
+                                        value={this.state.message} />
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
