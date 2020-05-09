@@ -30,15 +30,19 @@ function RenderDish({dish}) {
         );
 }
 
-function RenderComments({comments}) {
+function RenderComments({comments, addComment, dishId}) {
 
     if (comments != null) {
         const list_items = comments.map((comment) => {
             return (
-                <li key={comment.id} className="">
-                <p>{comment.comment}</p>
-                <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))} </p>
-                </li>
+                <div>
+                    <ul className = "list-unstyled">
+                        <li key={comment.id} className="">
+                            <p>{comment.comment}</p>
+                            <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))} </p>
+                        </li>
+                    </ul>
+                </div>
             );
         });
 
@@ -48,14 +52,11 @@ function RenderComments({comments}) {
                     <CardBody>
                         <CardTitle><h4>Comments</h4></CardTitle>
                         <CardText>
-                            <ul className = "list-unstyled">
-                                {list_items}
-                            </ul>
+                            {list_items}
                         </CardText>
                     </CardBody>
-                    <CommentForm />
                 </Card>
-
+                <CommentForm dishId={dishId} addComment={addComment}  />
             </div>
 
         )
@@ -77,12 +78,20 @@ class CommentForm extends Component {
           };
 
           this.toggleModal = this.toggleModal.bind(this);
+          this.handleSubmit = this.handleSubmit.bind(this);
         }
 
     toggleModal() {
         this.setState({
             isModalOpen: !this.state.isModalOpen
         });
+    }
+
+    handleSubmit(values) {
+        this.toggleModal();
+        console.log('Current state is: ' + JSON.stringify(values));
+        alert('Current state is: ' + JSON.stringify(values));
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render() {
@@ -96,7 +105,7 @@ class CommentForm extends Component {
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader>Submit Comment</ModalHeader>
                     <ModalBody>
-                        <LocalForm onSubmit={this.handleLogin}>
+                        <LocalForm onSubmit={this.handleSubmit}>
                             <Row className="form-group">
                             <Label htmlFor="email" md={2}>Rating</Label>
                             <Col md={10}>
@@ -113,11 +122,11 @@ class CommentForm extends Component {
                             </Col>
                             </Row>
                             <Row className="form-group">
-                                <Label htmlFor="name" md={2}>Your Name</Label>
+                                <Label htmlFor="author" md={2}>Your Name</Label>
                                 <Col md={10}>
-                                    <Control.text model=".name"
-                                        id="name" 
-                                        name="name"
+                                    <Control.text model=".author"
+                                        id="author" 
+                                        name="author"
                                         className="form-control"
                                         validators={{
                                             required, minLength: minLength(3), maxLength: maxLength(15)
@@ -125,7 +134,7 @@ class CommentForm extends Component {
                                         placeholder="Last Name" />
                                     <Errors 
                                         className="text-danger"
-                                        model=".name"
+                                        model=".author"
                                         show="touched"
                                         messages={{
                                             required: 'Required',
@@ -175,7 +184,9 @@ const DishDetail = (props) => {
                 </div>
                 <div className="row">
                     <RenderDish dish={props.dish} />
-                    <RenderComments comments={props.comments} />
+                    <RenderComments comments={props.comments}
+                        addComment={props.addComment}
+                        dishId={props.dish.id} />
                 </div>           
             </div>
         );
