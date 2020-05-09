@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody,
-    CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+    CardTitle, Breadcrumb, BreadcrumbItem, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 
@@ -46,7 +46,9 @@ function RenderComments({comments}) {
                             </ul>
                         </CardText>
                     </CardBody>
+                    <CommentForm />
                 </Card>
+
             </div>
 
         )
@@ -56,6 +58,36 @@ function RenderComments({comments}) {
         return(
             <div></div>
         )
+}
+
+class CommentForm extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isModalOpen: false
+          };
+
+          this.toggleModal = this.toggleModal.bind(this);
+        }
+
+    toggleModal() {
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        });
+    }
+
+    render() {
+        return ( 
+            <div className="m-1">
+                <Button outline  onClick={this.toggleModal}>
+                    <span className="fa fa-pencil fa-lg">Submit Comment</span>
+                </Button>
+            </div>
+)
+      }
+
 }
 
 const DishDetail = (props) => {
