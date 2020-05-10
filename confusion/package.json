@@ -2,7 +2,7 @@
   "name": "confusion",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://lpm0073.github.io/reactjs",
+  "homepage": "https://lpm0073.github.io/coursera-react/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
