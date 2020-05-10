@@ -1,5 +1,4 @@
 import * as ActionTypes from './ActionTypes';
-import { actionTypes } from 'react-redux-form';
 
 
 export const Promotions = (state = {
@@ -11,10 +10,10 @@ export const Promotions = (state = {
         case ActionTypes.ADD_PROMOS:
             return {...state, isLoading: false, errMess: null, promotions: action.payload};
 
-        case actionTypes.PROMOS_LOADING:
+        case ActionTypes.PROMOS_LOADING:
             return {...state, isLoading: true, errMess: null, promotions: []};
 
-        case actionTypes.PROMOS_FAILED:
+        case ActionTypes.PROMOS_FAILED:
             return {...state, isLoading: false, errMess: action.payload, promotions: []};
             
         default: 
