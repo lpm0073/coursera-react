@@ -30,16 +30,6 @@ function RenderLeader({leader}) {
 
 function About(props) {
 
-    const leaders = props.leaders.leaders.map((leader) => {
-        return (
-            <Stagger in>
-                <Fade in>
-                    <RenderLeader leader={leader} />
-                </Fade>
-            </Stagger>
-        );
-    });
-
     return(
         <div className="container">
             <div className="row">
