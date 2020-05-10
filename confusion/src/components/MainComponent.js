@@ -8,7 +8,7 @@ import About from './AboutComponent';
 import DishDetail from './DishdetailComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { postComment, fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
+import { postComment, fetchDishes, fetchComments, fetchPromos, fetchLeaders, postFeedback } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -24,6 +24,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => ({
   postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
+  postFeedback: (firstname, lastname, telnum, email, agree, message) => dispatch(postFeedback(firstname, lastname, telnum, email, agree, message)),
   fetchDishes: () => {dispatch(fetchDishes())},
   fetchComments: () => {dispatch(fetchComments())},
   fetchPromos: () => {dispatch(fetchPromos())},
@@ -69,6 +70,7 @@ class Main extends Component {
           dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]} 
           promotion={this.props.promotions.promotions.filter((promo) => promo.featured)[0]}
           leaders={this.props.leaders}
+          postFeedback={this.props.postFeedback}
           />
       );
     }
@@ -94,7 +96,11 @@ class Main extends Component {
                   <Route path="/home" component={HomePage} />
                   <Route exact path="/menu" component={() => <Menu dishes={this.props.dishes} />} />
                   <Route path="/menu/:dishId" component={DishWithId} />
-                  <Route exact path="/contactus" component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} />} />
+                  <Route exact path="/contactus" component={() => <Contact 
+                                                                    resetFeedbackForm={this.props.resetFeedbackForm} 
+                                                                    postFeedback={this.props.postFeedback}
+                                                                    />
+                                                            } />
                   <Route exact path="/aboutus" component={AboutPage} />
                   <Redirect to="/home" />
                 </Switch>
